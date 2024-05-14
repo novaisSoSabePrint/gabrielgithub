@@ -1,3 +1,5 @@
+import streamlit as st
+
 def determinar_signo(dia, mes):
     if (mes == 3 and dia >= 21) or (mes == 4 and dia <= 19):
         return "Áries"
@@ -26,9 +28,14 @@ def determinar_signo(dia, mes):
     else:
         return "Data inválida"
 
-dia_nascimento = int(input("Digite o dia do seu nascimento: "))
-mes_nascimento = int(input("Digite o mês do seu nascimento (em número): "))
+def main():
+    st.title("Descubra seu signo!")
+    dia_nascimento = st.number_input("Digite o dia do seu nascimento:", min_value=1, max_value=31, step=1)
+    mes_nascimento = st.number_input("Digite o mês do seu nascimento (em número):", min_value=1, max_value=12, step=1)
 
-signo = determinar_signo(dia_nascimento, mes_nascimento)
-print("Seu signo é:", signo)
+    if st.button("Descobrir Signo"):
+        signo = determinar_signo(int(dia_nascimento), int(mes_nascimento))
+        st.write("Seu signo é:", signo)
 
+if __name__ == "__main__":
+    main()
